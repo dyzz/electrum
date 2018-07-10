@@ -18,7 +18,7 @@ build-on-windows-steps
 * cp -r electrum-locale/locale electrum/lib/
 * cp electrum-icons/icons_rc.py electrum/gui/qt/
 * cd to the electrum directory
-* pip install ./contrib/requirements.txt
+* pip install -r ./contrib/requirements.txt
 * pip install trezor btchip-python
 * python setup.py install
 * cp contrib/build-wine/* .
