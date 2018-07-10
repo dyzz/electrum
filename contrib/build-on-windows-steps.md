@@ -7,7 +7,7 @@ build-on-windows-steps
 * git clone https://github.com/ecdsa/pyinstaller.git
 * git fetch origin fix_2952:fix_2952 && git checkout fix_2952
 * cd to pyinstaller directory
-* python3 setup.py install
+* run `python3 setup.py install` to install pyinstaller manually
 * cd to projects' parent directory 
 * git clone https://github.com/UnitedBitcoin/electrum-icons
 * git clone https://github.com/UnitedBitcoin/electrum-locale
