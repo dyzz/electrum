@@ -77,7 +77,7 @@ class PayToEdit(ScanQRTextEdit):
         x, y = line.split(',')
         out_type, out = self.parse_output(x)
         amount = self.parse_amount(y)
-        return out_type, out, amount
+        return out_type, out, amount, ""
 
     def parse_output(self, x):
         try:
@@ -136,12 +136,12 @@ class PayToEdit(ScanQRTextEdit):
         is_max = False
         for i, line in enumerate(lines):
             try:
-                _type, to_address, amount = self.parse_address_and_amount(line)
+                _type, to_address, amount, script = self.parse_address_and_amount(line)
             except:
                 self.errors.append((i, line.strip()))
                 continue
 
-            outputs.append((_type, to_address, amount))
+            outputs.append((_type, to_address, amount, script))
             if amount == '!':
                 is_max = True
             else:
@@ -171,7 +171,7 @@ class PayToEdit(ScanQRTextEdit):
                 amount = self.amount_edit.get_amount()
 
             _type, addr = self.payto_address
-            self.outputs = [(_type, addr, amount ,"")]
+            self.outputs = [(_type, addr, amount, "")]
 
         return self.outputs[:]
 

@@ -126,7 +126,7 @@ class PaymentRequest:
         self.outputs = []
         for o in self.details.outputs:
             addr = transaction.get_address_from_output_script(o.script)[1]
-            self.outputs.append((TYPE_ADDRESS, addr, o.amount))
+            self.outputs.append((TYPE_ADDRESS, addr, o.amount, ""))
         self.memo = self.details.memo
         self.payment_url = self.details.payment_url
 

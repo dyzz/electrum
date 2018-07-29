@@ -696,7 +696,7 @@ class Abstract_Wallet(PrintError):
             self.txo[tx_hash] = d = {}
             for n, txo in enumerate(tx.outputs()):
                 ser = tx_hash + ':%d'%n
-                _type, x, v,scri = txo
+                _type, x, v, scri = txo
                 if _type == TYPE_ADDRESS:
                     addr = x
                 elif _type == TYPE_PUBKEY:
@@ -877,7 +877,7 @@ class Abstract_Wallet(PrintError):
         # check outputs
         i_max = None
         for i, o in enumerate(outputs):
-            _type, data, value,scri = o
+            _type, data, value, scri = o
             if _type == TYPE_ADDRESS:
                 if not is_address(data):
                     raise BaseException("Invalid bitcoin address:" + data)
@@ -929,7 +929,7 @@ class Abstract_Wallet(PrintError):
                                       fee_estimator, self.dust_threshold(),sender,withdraw_from_balance)
         else:
             sendable = sum(map(lambda x:x['value'], inputs))+int(withdraw_from_balance)
-            _type, data, value,scri = outputs[i_max]
+            _type, data, value, scri = outputs[i_max]
             outputs[i_max] = (_type, data, 0,"")
             tx = Transaction.from_io(inputs, outputs[:])
             fee = fee_estimator(tx.estimated_size())
@@ -1075,7 +1075,7 @@ class Abstract_Wallet(PrintError):
         s = sorted(s, key=lambda x: x[2])
         for o in s:
             i = outputs.index(o)
-            otype, address, value,scrip = o
+            otype, address, value, scrip = o
             if value - delta >= self.dust_threshold():
                 outputs[i] = otype, address, value - delta
                 delta = 0
@@ -1093,7 +1093,7 @@ class Abstract_Wallet(PrintError):
     def cpfp(self, tx, fee):
         txid = tx.txid()
         for i, o in enumerate(tx.outputs()):
-            otype, address, value,scrip = o
+            otype, address, value, scrip = o
             if otype == TYPE_ADDRESS and self.is_mine(address):
                 break
         else:
@@ -1147,7 +1147,7 @@ class Abstract_Wallet(PrintError):
         info = {}
         xpubs = self.get_master_public_keys()
         for txout in tx.outputs():
-            _type, addr, amount,scrip = txout
+            _type, addr, amount, scrip = txout
             if self.is_change(addr):
                 index = self.get_address_index(addr)
                 pubkeys = self.get_public_keys(addr)

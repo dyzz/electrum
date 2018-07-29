@@ -29,7 +29,7 @@
 
 from .util import print_error, profiler
 
-from . import bitcoin,script
+from . import bitcoin, script
 from .bitcoin import *
 from .script import CScript,CScriptNum,OP_CALL,OP_SPEND,OP_CREATE,OP_DEPOSIT_TO_CONTRACT,hash160,OP_0,OP_1,OP_16
 import struct
@@ -780,7 +780,7 @@ class Transaction:
         return self
 
     @classmethod
-    def pay_script(self, output_type, addr,script_pub):
+    def pay_script(self, output_type, addr, script_pub):
         if output_type == TYPE_SCRIPT:
             return addr
         elif output_type == TYPE_ADDRESS:
@@ -951,9 +951,9 @@ class Transaction:
             output_type, addr, amount = output
             script_pub = ""
         else:
-            output_type, addr, amount,script_pub = output
+            output_type, addr, amount, script_pub = output
         s = int_to_hex(amount, 8)
-        script = self.pay_script(output_type, addr,script_pub)
+        script = self.pay_script(output_type, addr, script_pub)
         s += var_int(len(script)//2)
         s += script
         return s
@@ -964,7 +964,7 @@ class Transaction:
         if self.is_cal_withdraw_balance:
             return
         index = 0
-        for t,x,v,scri in self._outputs:
+        for t, x, v, scri in self._outputs:
             if t ==TYPE_SCRIPT:
                 if x[-2:] == "c5":
                     dt,da = get_address_from_output_script(bytearray.fromhex(x) ,index )
@@ -1049,7 +1049,7 @@ class Transaction:
         return sum(x['value'] for x in self.inputs()) + self.contract_withdraw_balance
 
     def output_value(self):
-        return sum(val for tp, addr, val,scr in self.outputs())
+        return sum(val for tp, addr, val, scr in self.outputs())
 
     def get_fee(self):
         return self.input_value() - self.output_value()
@@ -1164,7 +1164,7 @@ class Transaction:
     def get_outputs(self):
         """convert pubkeys to addresses"""
         o = []
-        for type, x, v,scri in self.outputs():
+        for type, x, v, scri in self.outputs():
             if type == TYPE_ADDRESS:
                 addr = x
             elif type == TYPE_PUBKEY:

@@ -1314,7 +1314,6 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
                 self.show_warning(_("Invalid Lines found:") + "\n\n" + '\n'.join([ _("Line #") + str(x[0]+1) + ": " + x[1] for x in errors]))
                 return
             outputs = self.payto_e.get_outputs(self.is_max)
-
             if self.payto_e.is_alias and self.payto_e.validated is False:
                 alias = self.payto_e.toPlainText()
                 msg = _('WARNING: the alias "%s" could not be validated via an additional security check, DNSSEC, and thus may not be correct.'%alias) + '\n'
@@ -1326,7 +1325,8 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
             self.show_error(_('No outputs'))
             return
 
-        for _type, addr, amount,scri in outputs:
+
+        for _type, addr, amount, scri in outputs:
             if addr is None:
                 self.show_error(_('Bitcoin Address is None'))
                 return

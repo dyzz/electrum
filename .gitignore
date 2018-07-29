@@ -19,3 +19,4 @@ bin/
 # tox files
 .cache/
 .coverage
+.idea
